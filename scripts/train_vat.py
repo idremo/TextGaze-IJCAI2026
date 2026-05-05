@@ -29,7 +29,7 @@ parser.add_argument('--lr_non_inout', type=float, default=1e-5)
 parser.add_argument('--lr_inout', type=float, default=1e-2)
 parser.add_argument('--n_workers', type=int, default=8)
 # 文本监督相关参数（与train_gazefollow保持一致）
-parser.add_argument('--text_supervision_weight', type=float, default=0.05, help='文本监督损失权重')
+parser.add_argument('--text_supervision_weight', type=float, default=0.1, help='文本监督损失权重')
 parser.add_argument('--vl_hidden_dim', type=int, default=256)
 parser.add_argument('--vl_nheads', type=int, default=8)
 parser.add_argument('--vl_enc_layers', type=int, default=3)
