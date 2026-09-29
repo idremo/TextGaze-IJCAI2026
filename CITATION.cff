@@ -1,0 +1,19 @@
+# This CITATION.cff file was generated with the intent to be completed
+# before camera-ready. Please verify author list and DOI.
+cff-version: 1.2.0
+title: "TextGaze: Prompting Gaze Target Estimation with Textual Scene Cues"
+message: >-
+  If you use this software or annotations, please cite the paper.
+type: software
+authors:
+  - given-names: Junhui
+    family-names: She
+keywords:
+  - gaze target estimation
+  - vision-language models
+  - textual scene cues
+  - attention understanding
+version: v1.0
+date-released: 2026-09-29
+license: Apache-2.0
+repository-code: "https://github.com/idremo/TextGaze-IJCAI2026"

@@ -1,0 +1,12 @@
+torch>=2.0
+torchvision>=0.15
+transformers>=4.40
+numpy<2
+Pillow>=10.0
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+tqdm>=4.65
+
+# optional: regenerate textual scene cues with a local Qwen2.5-VL (data_prep/preprocess_Qwen_*.py)
+# vllm>=0.9
