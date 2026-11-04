@@ -51,6 +51,28 @@ implementation-order clarification only: it does not modify any reported metrics
 results, or conclusions. All reported results were produced with this code order
 and remain consistent when reproduced with this code version.
 
+#### Reproducing the paper's visual-first order
+
+If you want to mirror the paper's equation, the current code can be changed in
+four places in `gazefuze/model.py`:
+
+1. append `visu_src` before `text_src` in `token_list`, and `visu_mask` before
+   `text_mask` in `mask_list`;
+2. concatenate `visu_pos` before `learnable_pos` when building `vl_pos`;
+3. change the text-supervision slice from
+   `layer_out[token_idx:token_idx + num_text_token]` to
+   `layer_out[token_idx + num_visu_token:token_idx + num_visu_token + num_text_token]`;
+4. extract visual tokens with
+   `vg_hs[token_idx:token_idx + num_visu_token]` instead of
+   `vg_hs[token_idx + num_text_token:]`.
+
+Keep the in/out token at index 0. These four changes are the index, mask and
+positional-encoding bookkeeping that must move with the token order. The two
+orders are equivalent under self-attention with per-token positional encodings,
+so no retraining is required (the tiny differences caused by floating-point
+reduction order can be ignored). The released code order is the one used for all
+reported results.
+
 ## 📊 Results (paper numbers)
 
 | Benchmark | Model | AUC | Avg L2 | Min L2 / AP |
