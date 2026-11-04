@@ -39,6 +39,18 @@ vision-language fusion transformer) and adds a **textual cues branch**:
 The text branch requires no extra human annotation beyond the generated captions
 and adds little inference overhead.
 
+### Implementation note: fusion token order
+
+The released code (`gazefuze/model.py`) assembles the fusion sequence as
+`[in/out, text, visual]`. The paper's equation lists visual tokens before text for
+presentation. During later code cleanup, the token assembly was unified to the
+actual indexing order used by the model and sanity-checked in personal reproduction
+runs. Because self-attention with per-token positional encodings is
+permutation-equivariant, the two orders are equivalent. This note is an
+implementation-order clarification only: it does not modify any reported metrics,
+results, or conclusions. All reported results were produced with this code order
+and remain consistent when reproduced with this code version.
+
 ## 📊 Results (paper numbers)
 
 | Benchmark | Model | AUC | Avg L2 | Min L2 / AP |
