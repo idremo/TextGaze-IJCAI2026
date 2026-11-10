@@ -73,6 +73,12 @@ so no retraining is required (the tiny differences caused by floating-point
 reduction order can be ignored). The released code order is the one used for all
 reported results.
 
+### Implementation note: optimizer
+
+The released implementation and all training runs behind the reported results
+use **Adam**. The optimizer name in the paper should read Adam; this is a
+naming correction and does not affect any reported metrics or conclusions.
+
 ## 📊 Results (paper numbers)
 
 | Benchmark | Model | AUC | Avg L2 | Min L2 / AP |
