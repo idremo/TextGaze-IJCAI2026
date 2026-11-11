@@ -24,6 +24,9 @@
 - **[2026-01]** TextGaze accepted to **IJCAI-ECAI 2026** (main track).
 - **[2026-09]** Repository released: code, test-set annotations, and text-cue annotations.
 
+> [!NOTE]
+> The original paper contains a few typographical errors. A corrected version is available on arXiv: [arXiv:2607.10130](https://arxiv.org/abs/2607.10130). Please refer to the latest arXiv version. The corrections are typographical only and do not affect any experimental results or details.
+
 ## 🧩 Method
 
 TextGaze builds on the GAZELLE gaze estimation architecture (DINOv2 backbone with a
@@ -38,46 +41,6 @@ vision-language fusion transformer) and adds a **textual cues branch**:
 
 The text branch requires no extra human annotation beyond the generated captions
 and adds little inference overhead.
-
-### Implementation note: fusion token order
-
-The released code (`gazefuze/model.py`) assembles the fusion sequence as
-`[in/out, text, visual]`. The paper's equation lists visual tokens before text for
-presentation. During later code cleanup, the token assembly was unified to the
-actual indexing order used by the model and sanity-checked in personal reproduction
-runs. Because self-attention with per-token positional encodings is
-permutation-equivariant, the two orders are equivalent. This note is an
-implementation-order clarification only: it does not modify any reported metrics,
-results, or conclusions. All reported results were produced with this code order
-and remain consistent when reproduced with this code version.
-
-#### Reproducing the paper's visual-first order
-
-If you want to mirror the paper's equation, the current code can be changed in
-four places in `gazefuze/model.py`:
-
-1. append `visu_src` before `text_src` in `token_list`, and `visu_mask` before
-   `text_mask` in `mask_list`;
-2. concatenate `visu_pos` before `learnable_pos` when building `vl_pos`;
-3. change the text-supervision slice from
-   `layer_out[token_idx:token_idx + num_text_token]` to
-   `layer_out[token_idx + num_visu_token:token_idx + num_visu_token + num_text_token]`;
-4. extract visual tokens with
-   `vg_hs[token_idx:token_idx + num_visu_token]` instead of
-   `vg_hs[token_idx + num_text_token:]`.
-
-Keep the in/out token at index 0. These four changes are the index, mask and
-positional-encoding bookkeeping that must move with the token order. The two
-orders are equivalent under self-attention with per-token positional encodings,
-so no retraining is required (the tiny differences caused by floating-point
-reduction order can be ignored). The released code order is the one used for all
-reported results.
-
-### Implementation note: optimizer
-
-The released implementation and all training runs behind the reported results
-use **Adam**. The optimizer name in the paper should read Adam; this is a
-naming correction and does not affect any reported metrics or conclusions.
 
 ## 📊 Results (paper numbers)
 
