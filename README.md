@@ -23,7 +23,10 @@
 - **[2026-11]** Pretrained checkpoints released: [checkpoints-v1.0](https://github.com/idremo/TextGaze-IJCAI2026/releases/tag/checkpoints-v1.0).
 
 > [!NOTE]
-> The original paper contains a few typographical errors. A corrected version is available on arXiv: [arXiv:2607.10130](https://arxiv.org/abs/2607.10130). Please refer to the latest arXiv version. The corrections are typographical only and do not affect any experimental results or details.
+> This repository documents three corrections to the camera-ready version;
+> see [ERRATA.md](ERRATA.md). The version of record is the IJCAI-ECAI 2026
+> proceedings version ([DOI: 10.24963/ijcai.2026/177](https://doi.org/10.24963/ijcai.2026/177)).
+> No model, experiment, result, or conclusion was changed.
 
 ## 🧩 Method
 
