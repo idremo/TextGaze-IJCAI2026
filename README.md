@@ -8,9 +8,9 @@
 > or at the person next to them?*)
 
 > [!WARNING]
-> **🚧 This repository is still under construction.** Code and test-set annotations
-> are available; checkpoints, training splits, and some docs are being added
-> progressively — see the TODO list below..
+> **🚧 This repository is still under construction.** Code, test-set annotations,
+> and pretrained checkpoints are available; training splits and some docs are
+> being added progressively — see the TODO list below.
 
 <p align="center">
   <img src="assets/qualitative/sample_2_00003610_4_comparison.jpg" width="80%">
@@ -23,6 +23,7 @@
 
 - **[2026-01]** TextGaze accepted to **IJCAI-ECAI 2026** (main track).
 - **[2026-09]** Repository released: code, test-set annotations, and text-cue annotations.
+- **[2026-11]** Pretrained checkpoints released: [checkpoints-v1.0](https://github.com/idremo/TextGaze-IJCAI2026/releases/tag/checkpoints-v1.0).
 
 > [!NOTE]
 > The original paper contains a few typographical errors. A corrected version is available on arXiv: [arXiv:2607.10130](https://arxiv.org/abs/2607.10130). Please refer to the latest arXiv version. The corrections are typographical only and do not affect any experimental results or details.
@@ -179,8 +180,9 @@ More side-by-side comparisons: [`assets/gallery/`](assets/gallery/).
 
 ## 📌 Checkpoints
 
-Checkpoint links are being prepared — see [`models/README.md`](models/README.md)
-for the release table (GazeFollow / VAT, ViT-B / ViT-L, with in/out variants).
+Pretrained models are available in [checkpoints-v1.0](https://github.com/idremo/TextGaze-IJCAI2026/releases/tag/checkpoints-v1.0)
+(GazeFollow / VAT, ViT-B / ViT-L, with in/out variants). See
+[`models/README.md`](models/README.md) for the full table, download links, and SHA-256 checksums.
 
 ## 📚 Citation
 
