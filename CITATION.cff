@@ -1,5 +1,3 @@
-# This CITATION.cff file was generated with the intent to be completed
-# before camera-ready. Please verify author list and DOI.
 cff-version: 1.2.0
 title: "TextGaze: Prompting Gaze Target Estimation with Textual Scene Cues"
 message: >-
@@ -8,12 +6,32 @@ type: software
 authors:
   - given-names: Junhui
     family-names: She
+    affiliation: "University of Science and Technology of China; Institute of Artificial Intelligence, Hefei Comprehensive National Science Center"
+  - given-names: Fei
+    family-names: Wang
+    affiliation: "Hefei University of Technology; Institute of Artificial Intelligence, Hefei Comprehensive National Science Center"
+  - given-names: Kun
+    family-names: Li
+    affiliation: "United Arab Emirates University"
+  - given-names: Yiqi
+    family-names: Nie
+    affiliation: "Institute of Artificial Intelligence, Hefei Comprehensive National Science Center; Anhui University"
+  - given-names: Yuxin
+    family-names: Liu
+    affiliation: "Institute of Artificial Intelligence, Hefei Comprehensive National Science Center; Anhui University"
+  - given-names: Zhangling
+    family-names: Duan
+    affiliation: "Institute of Artificial Intelligence, Hefei Comprehensive National Science Center"
+  - given-names: Xun
+    family-names: Yang
+    affiliation: "University of Science and Technology of China"
+doi: 10.24963/ijcai.2026/177
 keywords:
   - gaze target estimation
   - vision-language models
   - textual scene cues
   - attention understanding
 version: v1.0
-date-released: 2026-09-29
+date-released: 2026-11-11
 license: Apache-2.0
 repository-code: "https://github.com/idremo/TextGaze-IJCAI2026"

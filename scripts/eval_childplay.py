@@ -7,19 +7,25 @@ import numpy as np
 from sklearn.metrics import average_precision_score
 from tqdm import tqdm
 
-from gazefuze.model import get_gazelle_model
+from gazefuze.model import get_gazefuze_model
 from gazefuze.utils import vat_auc, vat_l2
 import warnings
 warnings.filterwarnings("ignore", message="The default value of the antialias parameter")
 
+
+def str2bool(value):
+    if isinstance(value, bool):
+        return value
+    return value.lower() in ("1", "true", "yes", "y")
+
 parser = argparse.ArgumentParser()
-parser.add_argument("--data_path", type=str, default="/data/sjh/EyeProject/DataSets/childplay_Qwen_En/images")
-parser.add_argument("--model_name", type=str, default="gazelle_dinov2_vitb14_inout")
-parser.add_argument("--ckpt_path", type=str, default="/data/sjh/EyeProject/GazeFuze-A/experiments/vat_base_1_epoch20/2025-11-27_11-03-20/epoch_6.pt")
+parser.add_argument("--data_path", type=str, default="datasets/childplay_Qwen_En/images")
+parser.add_argument("--model_name", type=str, default="gazefuze_dinov2_vitb14_inout")
+parser.add_argument("--ckpt_path", type=str, default="TextGaze_VAT_ViT-B_epoch6.pt")
 parser.add_argument("--batch_size", type=int, default=64)
-parser.add_argument("--filter_empty_frames", type=bool, default=True, help="过滤无人员标注的帧")
+parser.add_argument("--filter_empty_frames", type=str2bool, default=True, help="过滤无人员标注的帧")
 # 新增：控制是否使用文本（便于对比实验）
-parser.add_argument("--use_text", type=bool, default=True, help="是否使用dataloader返回的texts字段")
+parser.add_argument("--use_text", type=str2bool, default=True, help="是否使用dataloader返回的texts字段")
 args = parser.parse_args()
 
 class VideoAttentionTarget(torch.utils.data.Dataset):
@@ -127,8 +133,8 @@ def main():
     print("Running on {}".format(device))
 
     # 加载模型
-    model, transform = get_gazelle_model(args.model_name)
-    model.load_gazelle_state_dict(torch.load(args.ckpt_path, weights_only=True))
+    model, transform = get_gazefuze_model(args.model_name)
+    model.load_gazefuze_state_dict(torch.load(args.ckpt_path, weights_only=True))
     model.to(device)
     model.eval()
 

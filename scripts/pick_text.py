@@ -6,21 +6,21 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter  # 新增：高斯平滑
-from gazefuze.model import get_gazelle_model
+from gazefuze.model import get_gazefuze_model
 from gazefuze.utils import visualize_heatmap
 from tqdm import tqdm  # 用于进度条显示
 
 # ===================== 配置参数（无需修改，直接使用）=====================
 parser = argparse.ArgumentParser()
-parser.add_argument("--json_path", type=str, default="/data/sjh/EyeProject/GazeFuze/comparison_best3_samples/test3.json",
+parser.add_argument("--json_path", type=str, default="comparison_best3_samples/test3.json",
                     help="测试集JSON标注文件路径（新模型对应的带text标注）")
-parser.add_argument("--img_root", type=str, default="/data/sjh/EyeProject/GazeFuze/comparison_best3_samples",
+parser.add_argument("--img_root", type=str, default="comparison_best3_samples",
                     help="图片根目录（用于拼接绝对路径）")
-parser.add_argument("--old_model_ckpt", type=str, default="/data/sjh/EyeProject/GAZELLE/experiments/train_gazelle_vitb_gazefollow/2025-07-08_09-31-08/epoch_11.pt",
+parser.add_argument("--old_model_ckpt", type=str, default="old_model_checkpoint.pt",
                     help="旧模型权重路径")
-parser.add_argument("--new_model_ckpt", type=str, default="/data/sjh/EyeProject/GazeFuze-A/experiments/gf_base_1/2025-11-14_15-47-26/epoch_20.pt",
+parser.add_argument("--new_model_ckpt", type=str, default="TextGaze_GF_ViT-B_epoch20.pt",
                     help="新模型权重路径")
-parser.add_argument("--model_name", type=str, default="gazelle_dinov2_vitb14",
+parser.add_argument("--model_name", type=str, default="gazefuze_dinov2_vitb14",
                     help="模型名称（两个模型一致）")
 parser.add_argument("--save_dir", type=str, default="./comparison_best3_samples",
                     help="最优样本可视化结果保存目录")
@@ -80,8 +80,8 @@ def load_json_annotations(json_path):
 
 def load_model(ckpt_path, model_name, device):
     """加载模型（通用函数）"""
-    model, transform = get_gazelle_model(model_name)
-    model.load_gazelle_state_dict(torch.load(ckpt_path, weights_only=True))
+    model, transform = get_gazefuze_model(model_name)
+    model.load_gazefuze_state_dict(torch.load(ckpt_path, weights_only=True))
     model.to(device)
     model.eval()
     return model, transform

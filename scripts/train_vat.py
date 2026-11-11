@@ -15,9 +15,9 @@ from gazefuze.utils import vat_auc, vat_l2
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default="gazefuze_dinov2_vitb14_inout")
-parser.add_argument('--init_ckpt', type=str, default='TextGaze-IJCAI2026/experiments/gf_base_1/2025-11-14_15-47-26/epoch_20.pt', 
+parser.add_argument('--init_ckpt', type=str, default='TextGaze_GF_ViT-B_epoch20.pt', 
                     help='checkpoint for initialization (trained on GazeFollow)')
-parser.add_argument('--data_path', type=str, default='TextGaze-IJCAI2026/datasets/videoattentiontarget_Qwen_En')
+parser.add_argument('--data_path', type=str, default='datasets/videoattentiontarget_Qwen_En')
 parser.add_argument('--frame_sample_every', type=int, default=6)
 parser.add_argument('--ckpt_save_dir', type=str, default='./experiments')
 parser.add_argument('--exp_name', type=str, default='vat_base_1_epoch20')

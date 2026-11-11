@@ -6,14 +6,14 @@ import logging
 from datetime import datetime
 
 from gazefuze.dataloader import GazeDataset, collate_fn
-from gazefuze.model import get_gazelle_model
+from gazefuze.model import get_gazefuze_model
 from gazefuze.utils import gazefollow_auc, gazefollow_l2
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default="gazelle_dinov2_vitb14", 
+parser.add_argument('--model', type=str, default="gazefuze_dinov2_vitb14", 
                     help='与训练时一致的模型名称')
 parser.add_argument('--data_path', type=str, 
-                    default='/data/sjh/EyeProject/DataSets/gooreal_Qwen_En', 
+                    default='datasets/gooreal_Qwen_En', 
                     help='新数据所在目录（包含test_preprocessed.json）')
 parser.add_argument('--ckpt_path', type=str, required=True, 
                     help='训练好的模型权重路径')
@@ -45,7 +45,7 @@ def main():
     logging.info(f"测试数据路径: {args.data_path}")
 
     # 加载模型
-    model, transform = get_gazelle_model(args.model)
+    model, transform = get_gazefuze_model(args.model)
     model.cuda()
     
     # 加载训练好的权重

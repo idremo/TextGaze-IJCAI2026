@@ -11,7 +11,7 @@ Example:
         --bbox 0.60 0.33 0.66 0.43 \
         --text "Several students at computers; the foreground student gazes at the woman on the right." \
         --ckpt <gf_checkpoint>.pt \
-        --arch gazelle_dinov2_vitl14 \
+        --arch gazefuze_dinov2_vitl14 \
         --out overlay.jpg
 """
 import argparse
@@ -20,7 +20,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from gazefuze.model import get_gazelle_model
+from gazefuze.model import get_gazefuze_model
 
 
 def parse_args():
@@ -32,7 +32,7 @@ def parse_args():
     ap.add_argument("--text", type=str, default="",
                     help="textual scene cue (Qwen2.5-VL style caption); empty = no cue")
     ap.add_argument("--ckpt", type=str, required=True, help="checkpoint .pt path")
-    ap.add_argument("--arch", type=str, default="gazelle_dinov2_vitl14",
+    ap.add_argument("--arch", type=str, default="gazefuze_dinov2_vitl14",
                     help="model arch (append _inout for in/out-of-frame models)")
     ap.add_argument("--out", type=str, default="overlay.jpg", help="output overlay path")
     return ap.parse_args()
@@ -44,8 +44,8 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Running on {device}")
 
-    model, transform = get_gazelle_model(args.arch)
-    model.load_gazelle_state_dict(torch.load(args.ckpt, map_location="cpu", weights_only=True))
+    model, transform = get_gazefuze_model(args.arch)
+    model.load_gazefuze_state_dict(torch.load(args.ckpt, map_location="cpu", weights_only=True))
     model.to(device).eval()
 
     pil = Image.open(args.image).convert("RGB")

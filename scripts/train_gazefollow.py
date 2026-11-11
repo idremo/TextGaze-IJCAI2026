@@ -13,7 +13,7 @@ from gazefuze.utils import gazefollow_auc, gazefollow_l2
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, default="gazefuze_dinov2_vitb14")
-parser.add_argument('--data_path', type=str, default='TextGaze-IJCAI2026/datasets/gazefollow_extended_Qwen_En')
+parser.add_argument('--data_path', type=str, default='datasets/gazefollow_extended_Qwen_En')
 parser.add_argument('--ckpt_save_dir', type=str, default='./experiments')
 parser.add_argument('--exp_name', type=str, default='train_gazefollow')
 parser.add_argument('--log_iter', type=int, default=10, help='how often to log loss during training')

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import os
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
@@ -28,8 +29,11 @@ class Backbone(nn.Module, ABC):
 class DinoV2Backbone(Backbone):
     def __init__(self, model_name):
         super(DinoV2Backbone, self).__init__()
-        # self.model = torch.hub.load('facebookresearch/dinov2', model_name)
-        self.model = torch.hub.load(repo_or_dir='/data/sjh/.cache/torch/hub/facebookresearch_dinov2_main', model=model_name, trust_repo=True, source='local')
+        hub_dir = os.environ.get("DINOV2_HUB_DIR")
+        if hub_dir:
+            self.model = torch.hub.load(repo_or_dir=hub_dir, model=model_name, trust_repo=True, source='local')
+        else:
+            self.model = torch.hub.load('facebookresearch/dinov2', model_name, trust_repo=True)
 
     def forward(self, x):
         b, c, h, w = x.shape

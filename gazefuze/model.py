@@ -48,7 +48,7 @@ class GazeFuze(nn.Module):
                  num_layers=3, 
                  in_size=(448, 448), 
                  out_size=(64, 64),
-                 text_encoder_name: str = 'TextGaze-IJCAI2026/models/bert-base-uncased',
+                 text_encoder_name: str = 'bert-base-uncased',
                  args=None):
         super().__init__()
         self.backbone = backbone
@@ -326,6 +326,10 @@ class GazeFuze(nn.Module):
             current_state_dict[k] = ckpt_state_dict[k]
         self.load_state_dict(current_state_dict, strict=False)
 
+    # Backward-compatible aliases for the original GAZELLE-style API.
+    get_gazelle_state_dict = get_gazefuze_state_dict
+    load_gazelle_state_dict = load_gazefuze_state_dict
+
 
 def get_gazefuze_model(model_name: str, args=None) -> Tuple[nn.Module, callable]:
     factory = {
@@ -336,6 +340,10 @@ def get_gazefuze_model(model_name: str, args=None) -> Tuple[nn.Module, callable]
     }
     assert model_name in factory.keys(), f"invalid model name: {model_name}"
     return factory[model_name]()
+
+def get_gazelle_model(model_name: str, args=None):
+    """Legacy alias accepting ``gazelle_dinov2_*`` model names."""
+    return get_gazefuze_model(model_name.replace("gazelle_", "gazefuze_", 1), args)
 
 def gazefuze_dinov2_vitb14(args) -> Tuple[nn.Module, callable]:
     backbone = DinoV2Backbone('dinov2_vitb14')
